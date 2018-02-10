@@ -1,0 +1,9 @@
+{
+  "version": "v1",
+  "packages": {
+    "bs-storybook": {
+      "signature": "660e02f0811d7b445fd00a9da72b7696",
+      "file": true
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "reason-slider",
+  "version": "0.0.0",
+  "reason": { "react-jsx": 2 },
+  "refmt": 3,
+  "namespace": true,
+  "bsc-flags": ["-bs-super-errors"],
+  "sources": [
+    {
+      "dir": "src",
+      "subdirs": true
+    },
+    { "dir": "stories", "type": "dev" }
+  ],
+  "package-specs": [
+    {
+      "module": "commonjs",
+      "in-source": true
+    }
+  ],
+  "bs-dev-dependencies": ["bs-storybook"],
+  "bs-dependencies": ["reason-react", "bs-webapi"]
+}

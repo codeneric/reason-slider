@@ -1,0 +1,9 @@
+{
+  "name": "bs-storybook",
+  "version": "0.0.0",
+  "reason": { "react-jsx": 2 },
+  "refmt": 3,
+  "bsc-flags": ["-bs-super-errors"],
+  "sources": ["src"],
+  "bs-dependencies": ["reason-react"]
+}
