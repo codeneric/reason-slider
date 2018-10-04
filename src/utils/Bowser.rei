@@ -1,3 +1,7 @@
-type t = {. "mobile": Js.Nullable.t(Js.boolean), "tablet": Js.Nullable.t(Js.boolean)};
+type t = {
+  .
+  "mobile": Js.Nullable.t(bool),
+  "tablet": Js.Nullable.t(bool),
+};
 
 [@bs.module] external bowser : t = "bowser";
