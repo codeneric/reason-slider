@@ -55,6 +55,7 @@ module Make = (M: SliderType) => {
         |> Webapi.Dom.DomRect.width
       };
     /* optimized resize  https://developer.mozilla.org/de/docs/Web/Events/resize */
+
     let getScreenCenter = target => {
       let w = getTargetInnerWidth(target);
       let h = getTargetInnerHeight(target);
@@ -132,7 +133,7 @@ module Make = (M: SliderType) => {
       | None => false
       | Some(m) => m
       };
-    let indexFromPointer = (items, pointer) : M.index =>
+    let indexFromPointer = (items, pointer): M.index =>
       items
       |> Array.of_list
       |> Js.Array.findIndexi((item, i) => pointer === M.getPointer(item, i));
@@ -152,8 +153,8 @@ module Make = (M: SliderType) => {
       pointer |> indexFromPointer(items) === List.length(items) - 1;
     Js.log(Bowser.bowser);
     let isDesktop = () =>
-      ! (Bowser.bowser##mobile |> maybeBool)
-      && ! (Bowser.bowser##tablet |> maybeBool);
+      !(Bowser.bowser##mobile |> maybeBool)
+      && !(Bowser.bowser##tablet |> maybeBool);
     type state = {
       isOpen: bool,
       showNavigation: bool,
@@ -161,7 +162,7 @@ module Make = (M: SliderType) => {
     };
     module Portal = {
       [@bs.module "react-portal"]
-      external portal : ReasonReact.reactClass = "Portal";
+      external portal: ReasonReact.reactClass = "Portal";
       Js.log(portal);
       let make = children =>
         ReasonReact.wrapJsForReason(
@@ -261,9 +262,9 @@ module Make = (M: SliderType) => {
           <svg
             width="64"
             height="64"
-            fill=(getFill(fn))
+            fill={getFill(fn)}
             version="1"
-            transform=("rotate(" ++ string_of_int(rotate) ++ ")")
+            transform={"rotate(" ++ string_of_int(rotate) ++ ")"}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 129 129">
             <path
@@ -271,15 +272,14 @@ module Make = (M: SliderType) => {
             />
           </svg>;
         <Motion.New.TransitionMotion
-          willLeave=(
-            _ =>
-              Some(Js.Dict.fromList([("progress", Motion.New.spring(0))]))
-              |> Js.Nullable.fromOption
-          )
-          willEnter=(_ => Js.Dict.fromList([("progress", 0.)]))
-          styles=(
-            state.showNavigation ?
-              [|
+          willLeave={_ =>
+            Some(Js.Dict.fromList([("progress", Motion.New.spring(0))]))
+            |> Js.Nullable.fromOption
+          }
+          willEnter={_ => Js.Dict.fromList([("progress", 0.)])}
+          styles={
+            state.showNavigation
+              ? [|
                 {
                   "style":
                     Js.Dict.fromList([
@@ -298,71 +298,66 @@ module Make = (M: SliderType) => {
                   "key": "arrows",
                   "data": None |> Js.Nullable.fromOption,
                 },
-              |] :
-              [||]
-          )>
-          ...(
-               i =>
-                 switch (i) {
-                 | [||] => ReasonReact.null
-                 | i =>
-                   let _progress =
-                     Calculations.precisionRound(
-                       Js.Dict.unsafeGet(i[0]##style, "progress"),
-                       3,
-                     );
-                   <div>
-                     <div
-                       onClick=(_ => send(Next))
-                       disabled=(
-                         switch (state.pointer) {
-                         | None => true
-                         | Some(p) => isPointerLastEntry(p, items)
-                         }
-                       )
-                       style=(
-                         ReactDOMRe.Style.make(
-                           ~position="absolute",
-                           ~right="0",
-                           ~width="10%",
-                           ~top="0",
-                           ~height=" 100%",
-                           ~display="flex",
-                           ~justifyContent="center",
-                           ~zIndex=string_of_int(zIndex + 1),
-                           ~alignItems="center",
-                           (),
-                         )
-                       )>
-                       (arrow(isPointerLastEntry, 0))
-                     </div>
-                     <div
-                       onClick=(_ => send(Previous))
-                       disabled=(
-                         switch (state.pointer) {
-                         | None => true
-                         | Some(p) => isPointerFirstEntry(p, items)
-                         }
-                       )
-                       style=(
-                         ReactDOMRe.Style.make(
-                           ~position="absolute",
-                           ~left="0",
-                           ~width="10%",
-                           ~top=" 0",
-                           ~height=" 100%",
-                           ~display="flex",
-                           ~justifyContent="center",
-                           ~zIndex=string_of_int(zIndex + 1),
-                           ~alignItems="center",
-                           (),
-                         )
-                       )>
-                       (arrow(isPointerFirstEntry, 180))
-                     </div>
-                   </div>;
-                 }
-             )
+              |]
+              : [||]
+          }>
+          ...{i =>
+            switch (i) {
+            | [||] => ReasonReact.null
+            | i =>
+              let _progress =
+                Calculations.precisionRound(
+                  Js.Dict.unsafeGet(i[0]##style, "progress"),
+                  3,
+                );
+              <div>
+                <div
+                  onClick={_ => send(Next)}
+                  disabled={
+                    switch (state.pointer) {
+                    | None => true
+                    | Some(p) => isPointerLastEntry(p, items)
+                    }
+                  }
+                  style={ReactDOMRe.Style.make(
+                    ~position="absolute",
+                    ~right="0",
+                    ~width="10%",
+                    ~top="0",
+                    ~height=" 100%",
+                    ~display="flex",
+                    ~justifyContent="center",
+                    ~zIndex=string_of_int(zIndex + 1),
+                    ~alignItems="center",
+                    (),
+                  )}>
+                  {arrow(isPointerLastEntry, 0)}
+                </div>
+                <div
+                  onClick={_ => send(Previous)}
+                  disabled={
+                    switch (state.pointer) {
+                    | None => true
+                    | Some(p) => isPointerFirstEntry(p, items)
+                    }
+                  }
+                  style={ReactDOMRe.Style.make(
+                    ~position="absolute",
+                    ~left="0",
+                    ~width="10%",
+                    ~top=" 0",
+                    ~height=" 100%",
+                    ~display="flex",
+                    ~justifyContent="center",
+                    ~zIndex=string_of_int(zIndex + 1),
+                    ~alignItems="center",
+                    (),
+                  )}>
+                  {arrow(isPointerFirstEntry, 180)}
+                </div>
+              </div>;
+            }
+          }
         </Motion.New.TransitionMotion>;
       };
       {
@@ -394,80 +389,74 @@ module Make = (M: SliderType) => {
           | Show(pointer) =>
             ReasonReact.UpdateWithSideEffects(
               {...state, isOpen: true, pointer: Some(pointer)},
-              (
-                self => {
-                  bindShortcuts(self);
-                  if (disableScroll) {
-                    disableScrollFn();
-                  };
-                  callOnChange(self, items, onChange);
-                  ();
-                }
-              ),
+              self => {
+                bindShortcuts(self);
+                if (disableScroll) {
+                  disableScrollFn();
+                };
+                callOnChange(self, items, onChange);
+                ();
+              },
             )
           | Next =>
-            ! state.isOpen ?
-              ReasonReact.NoUpdate :
-              (
+            !state.isOpen
+              ? ReasonReact.NoUpdate
+              : (
                 switch (state.pointer) {
                 | None => ReasonReact.NoUpdate
                 | Some(pointer) =>
                   let nextIndex = (pointer |> indexFromPointer(items)) + 1;
-                  nextIndex >= List.length(items) ?
-                    ReasonReact.NoUpdate :
-                    ReasonReact.UpdateWithSideEffects(
-                      {
-                        ...state,
-                        pointer: Some(nextPointer(pointer, items)),
-                      },
-                      (self => callOnChange(self, items, onChange)),
-                    );
+                  nextIndex >= List.length(items)
+                    ? ReasonReact.NoUpdate
+                    : ReasonReact.UpdateWithSideEffects(
+                        {
+                          ...state,
+                          pointer: Some(nextPointer(pointer, items)),
+                        },
+                        self => callOnChange(self, items, onChange),
+                      );
                 }
               )
           | Previous =>
-            ! state.isOpen ?
-              ReasonReact.NoUpdate :
-              (
+            !state.isOpen
+              ? ReasonReact.NoUpdate
+              : (
                 switch (state.pointer) {
                 | None => ReasonReact.NoUpdate
                 | Some(pointer) =>
                   let prevIndex = (pointer |> indexFromPointer(items)) - 1;
-                  prevIndex < 0 ?
-                    ReasonReact.NoUpdate :
-                    ReasonReact.UpdateWithSideEffects(
-                      {
-                        ...state,
-                        pointer: Some(previousPointer(pointer, items)),
-                      },
-                      (self => callOnChange(self, items, onChange)),
-                    );
+                  prevIndex < 0
+                    ? ReasonReact.NoUpdate
+                    : ReasonReact.UpdateWithSideEffects(
+                        {
+                          ...state,
+                          pointer: Some(previousPointer(pointer, items)),
+                        },
+                        self => callOnChange(self, items, onChange),
+                      );
                 }
               )
           | Close =>
             ReasonReact.UpdateWithSideEffects(
               {...state, isOpen: false, pointer: None},
-              (
-                _ => {
-                  if (disableScroll) {
-                    enableScrollFn();
-                  };
-                  detachShortcuts();
-                }
-              ),
+              _ => {
+                if (disableScroll) {
+                  enableScrollFn();
+                };
+                detachShortcuts();
+              },
             )
           | ShowNavigation =>
             ReasonReact.Update({...state, showNavigation: true})
           | ShowNavigationAndAutoHide =>
             ReasonReact.UpdateWithSideEffects(
               {...state, showNavigation: true},
-              (
-                ({send, _}) =>
-                  Js.Global.setTimeout(
-                    () => send(HideNavigation),
-                    hideNavigationTimeout,
-                  )
-                  |> ignore
-              ),
+              ({send, _}) =>
+                Js.Global.setTimeout(
+                  () => send(HideNavigation),
+                  hideNavigationTimeout,
+                )
+                |> ignore,
             )
           | HideNavigation =>
             ReasonReact.Update({...state, showNavigation: false})
@@ -502,17 +491,16 @@ module Make = (M: SliderType) => {
           let closeFn = () => send(Close);
           <div>
             <Motion.New.TransitionMotion
-              willLeave=(
-                _ =>
-                  Some(
-                    Js.Dict.fromList([("progress", Motion.New.spring(0))]),
-                  )
-                  |> Js.Nullable.fromOption
-              )
-              willEnter=(_ => Js.Dict.fromList([("progress", 0.)]))
-              styles=(
-                state.isOpen ?
-                  [|
+              willLeave={_ =>
+                Some(
+                  Js.Dict.fromList([("progress", Motion.New.spring(0))]),
+                )
+                |> Js.Nullable.fromOption
+              }
+              willEnter={_ => Js.Dict.fromList([("progress", 0.)])}
+              styles={
+                state.isOpen
+                  ? [|
                     {
                       "style":
                         Js.Dict.fromList([
@@ -521,76 +509,65 @@ module Make = (M: SliderType) => {
                       "key": "slider",
                       "data": None |> Js.Nullable.fromOption,
                     },
-                  |] :
-                  [||]
-              )>
-              ...(
-                   i =>
-                     switch (i) {
-                     | [||] => ReasonReact.null
-                     | i =>
-                       let progress =
-                         Calculations.precisionRound(
-                           Js.Dict.unsafeGet(i[0]##style, "progress"),
-                           3,
-                         );
-                       <Portal>
-                         <div
-                           onClick=(_ => send(Close))
-                           style=(
-                             ReactDOMRe.Style.make(
-                               ~zIndex=string_of_int(zIndex),
-                               ~position="fixed",
-                               ~top="0",
-                               ~left="0",
-                               ~pointerEvents=
-                                 progress <= 0.95 ? "none" : "auto",
-                               ~opacity=string_of_float(progress),
-                               ~backgroundColor,
-                               ~width="100%",
-                               ~height="100%",
-                               (),
-                             )
-                           )>
-                           (
-                             progress >= 0.8 ?
-                               <div
-                                 onClick=(
-                                   e => {
-                                     ReactEvent.Mouse.stopPropagation(e);
-                                     if (! isDesktop()
-                                         && ! state.showNavigation) {
-                                       send(ShowNavigationAndAutoHide);
-                                     };
-                                   }
-                                 )>
-                                 (renderNavigation(self))
-                                 (
-                                   switch (state.pointer) {
-                                   | None => ReasonReact.null
-                                   | Some(p) =>
-                                     try (
-                                       renderSlide({
-                                         progress,
-                                         item: M.getItem(p, items),
-                                         close: closeFn,
-                                       })
-                                     ) {
-                                     | _ =>
-                                       send(Close);
-                                       ReasonReact.null;
-                                     }
-                                   }
-                                 )
-                               </div> :
-                               ReasonReact.null
-                           )
-                         </div>
-                       </Portal>;
-                     }
-                 )
+                  |]
+                  : [||]
+              }>
+              ...{i =>
+                switch (i) {
+                | [||] => ReasonReact.null
+                | i =>
+                  let progress =
+                    Calculations.precisionRound(
+                      Js.Dict.unsafeGet(i[0]##style, "progress"),
+                      3,
+                    );
+                  <Portal>
+                    <div
+                      onClick={_ => send(Close)}
+                      style={ReactDOMRe.Style.make(
+                        ~zIndex=string_of_int(zIndex),
+                        ~position="fixed",
+                        ~top="0",
+                        ~left="0",
+                        ~pointerEvents=progress <= 0.95 ? "none" : "auto",
+                        ~opacity=Js.Float.toString(progress),
+                        ~backgroundColor,
+                        ~width="100%",
+                        ~height="100%",
+                        (),
+                      )}>
+                      {progress >= 0.8
+                         ? <div
+                             onClick={e => {
+                               ReactEvent.Mouse.stopPropagation(e);
+                               if (!isDesktop() && !state.showNavigation) {
+                                 send(ShowNavigationAndAutoHide);
+                               };
+                             }}>
+                             {renderNavigation(self)}
+                             {switch (state.pointer) {
+                              | None => ReasonReact.null
+                              | Some(p) =>
+                                try (
+                                  renderSlide({
+                                    progress,
+                                    item: M.getItem(p, items),
+                                    close: closeFn,
+                                  })
+                                ) {
+                                | _ =>
+                                  send(Close);
+                                  ReasonReact.null;
+                                }
+                              }}
+                           </div>
+                         : ReasonReact.null}
+                    </div>
+                  </Portal>;
+                }
+              }
             </Motion.New.TransitionMotion>
-            (render({show: p => send(Show(p)), close: closeFn}))
+            {render({show: p => send(Show(p)), close: closeFn})}
           </div>;
         },
       };
