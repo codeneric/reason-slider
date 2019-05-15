@@ -1533,15 +1533,17 @@ bs-platform@^5.0.3:
   resolved "https://registry.yarnpkg.com/bs-platform/-/bs-platform-5.0.3.tgz#2b167603ef52574cb9534fabab702f6013715e6c"
   integrity sha512-GAeypBebeDGTay5kJ3v5Z3Whp1Q4zQ0hAttflVtPG3zps88xDZnVAlS3JGIIBDmJFEMyNtv5947a/IWKvWXcPw==
 
-bs-storybook@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/bs-storybook/-/bs-storybook-0.2.0.tgz#3f6de2ce53b7c9e3cf42ecad3e053f6c94ddada6"
+bs-storybook@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/bs-storybook/-/bs-storybook-0.3.0.tgz#a0f5f2f356bf1a39b0b4fd4a3933cc429c2e3911"
+  integrity sha512-FAMVnLd1nWVWLrk3+br5s+PCkJNll5fz2o+wXe4CZLQAJLNF71XxQ56HubNzYVUFVuHgNotWyjRE7wWoWQkiCg==
   dependencies:
-    reason-react "^0.4.2"
+    reason-react "^0.5.3"
 
-bs-webapi@^0.12.2:
-  version "0.12.2"
-  resolved "https://registry.yarnpkg.com/bs-webapi/-/bs-webapi-0.12.2.tgz#5d85130dafbee44fd1232a851c34f06b5ecdf3f9"
+bs-webapi@^0.15.0:
+  version "0.15.0"
+  resolved "https://registry.yarnpkg.com/bs-webapi/-/bs-webapi-0.15.0.tgz#c0d08d77992cd4946d57a4491363034fd3e0e2ec"
+  integrity sha512-qbh+AoJU9KNA+Ci5K/f7buCRpkXXR/2nnlC6NwW9n+zAJDCTtUEDbuQMBmgS5VrrMHyaX7TpL3B2e4I2i0p6hg==
 
 buffer-xor@^1.0.3:
   version "1.0.3"
@@ -4830,9 +4832,10 @@ readdirp@^2.0.0:
     readable-stream "^2.0.2"
     set-immediate-shim "^1.0.1"
 
-reason-react@^0.4.2:
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/reason-react/-/reason-react-0.4.2.tgz#690d34e3e91a2585cdc5f58384b6c8ff653c32c1"
+reason-react@^0.5.3:
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/reason-react/-/reason-react-0.5.3.tgz#10601809742fd991109ec9d69ad4baf2c3f17540"
+  integrity sha512-dUkoqXrP/gOjkmkW+k/otEUP+yeXH5+QfdxNT5EW60MXM3zbCdFhbNzKBbjYOZ6x96UbxK869CObjX04BdJEDg==
   dependencies:
     react ">=15.0.0 || >=16.0.0"
     react-dom ">=15.0.0 || >=16.0.0"

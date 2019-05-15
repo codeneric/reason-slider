@@ -42,14 +42,14 @@ var Default = /* module */[];
 function Make(M) {
   var getTargetInnerHeight = function (target) {
     if (target !== undefined) {
-      return Caml_option.valFromOption(target).getBoundingClientRect().height;
+      return Caml_option.valFromOption(target).getBoundingClientRect().height | 0;
     } else {
       return window.innerHeight;
     }
   };
   var getTargetInnerWidth = function (target) {
     if (target !== undefined) {
-      return Caml_option.valFromOption(target).getBoundingClientRect().width;
+      return Caml_option.valFromOption(target).getBoundingClientRect().width | 0;
     } else {
       return window.innerWidth;
     }

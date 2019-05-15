@@ -45,6 +45,7 @@ module Make = (M: SliderType) => {
         target
         |> Webapi.Dom.Element.getBoundingClientRect
         |> Webapi.Dom.DomRect.height
+        |> int_of_float
       };
     let getTargetInnerWidth = target =>
       switch (target) {
@@ -53,6 +54,7 @@ module Make = (M: SliderType) => {
         target
         |> Webapi.Dom.Element.getBoundingClientRect
         |> Webapi.Dom.DomRect.width
+        |> int_of_float
       };
     /* optimized resize  https://developer.mozilla.org/de/docs/Web/Events/resize */
 

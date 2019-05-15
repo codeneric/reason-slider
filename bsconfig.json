@@ -6,9 +6,7 @@
   },
   "refmt": 3,
   "namespace": true,
-  "bsc-flags": [
-    "-bs-super-errors"
-  ],
+  "bsc-flags": ["-bs-super-errors"],
   "sources": [
     {
       "dir": "src",
@@ -25,11 +23,6 @@
       "in-source": true
     }
   ],
-  "bs-dev-dependencies": [
-    "bs-storybook"
-  ],
-  "bs-dependencies": [
-    "reason-react",
-    "bs-webapi"
-  ]
+  "bs-dev-dependencies": ["bs-storybook"],
+  "bs-dependencies": ["reason-react", "bs-webapi"]
 }
