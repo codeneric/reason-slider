@@ -266,6 +266,10 @@ module Make = (M: SliderType) => {
             height="64"
             fill={getFill(fn)}
             version="1"
+             style={ReactDOMRe.Style.make(
+              ~transform="rotate(" ++ string_of_int(rotate) ++ "deg)",
+              (),
+            )}
             transform={"rotate(" ++ string_of_int(rotate) ++ ")"}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 129 129">
