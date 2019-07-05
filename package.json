@@ -1,6 +1,6 @@
 {
   "name": "reason-slider",
-  "version": "0.0.10",
+  "version": "0.0.12",
   "scripts": {
     "build": "bsb -make-world",
     "start": "bsb -make-world -w",
@@ -8,9 +8,9 @@
     "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "peerDependencies": {
-    "bs-platform": "^5.0.3",
-    "bs-webapi": "^0.15.0",
-     "react": "~16.2.0",
+    "bs-platform": "^5.0.4",
+    "bs-webapi": "^0.15.2",
+    "react": "~16.2.0",
     "react-dom": "~16.2.0",
     "reason-react": "^0.7.0"
   },
@@ -20,6 +20,7 @@
     "babel-core": "~6.26.0"
   },
   "dependencies": {
+    "bs-storybook": "^0.3.0",
     "combokeys": "~3.0.0",
     "react-motion": "~0.5.2",
     "react-portal": "~4.1.2"
